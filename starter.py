@@ -1,11 +1,26 @@
 import time
-from blink1.blink1 import blink1
+from blink1.blink1 import Blink1
+import pyperclip
+import re
 
-with blink1() as b1:
-    b1.fade_to_color(100, 'navy')
-    time.sleep(2)
-    b1.fade_to_color(1000, 'white', 0) # Set both to white
-    b1.fade_to_color(1000, 'red', 1) # Set LED 1 to red
-    b1.fade_to_color(1000, 'green', 2) # Set LED 2 to green
-    time.sleep(10)
+# Find matches in clipboard text.
+text = str(pyperclip.paste())
+matches = []
 
+matches = re.findall(r"frica[\w]*", text)
+print("# of matches:", len(matches))
+
+# Using it without context manager will leave the blink(1) at the end of execution.
+b1 = Blink1()
+
+# Blink as many times as it found the text
+if len(matches) > 0:
+	print(matches)
+	for i in enumerate(matches, start=1):
+		print("blink #", i)
+		# red (no kidding)	
+		b1.fade_to_color(500, 'red')
+		time.sleep(1)
+		#black
+		b1.fade_to_rgb(1000, 0, 0, 0)
+		time.sleep(1)
