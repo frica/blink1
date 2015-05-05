@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from blink1.blink1 import Blink1
 import requests
 import time
