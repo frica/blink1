@@ -6,7 +6,7 @@ import time
 
 blink = Blink1()
 
-url = "http://jenkins01-iibu.agfahealthcare.com/api/python"
+url = "https://jenkins.qa.ubuntu.com/api/python"
 
 try:
     resp = requests.get(url, timeout=30).text

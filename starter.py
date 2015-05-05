@@ -15,12 +15,12 @@ b1 = Blink1()
 
 # Blink as many times as it found the text
 if len(matches) > 0:
-	print(matches)
-	for i in enumerate(matches, start=1):
-		print("blink #", i)
-		# red (no kidding)	
-		b1.fade_to_color(500, 'red')
-		time.sleep(1)
-		#black
-		b1.fade_to_rgb(1000, 0, 0, 0)
-		time.sleep(1)
+    print(matches)
+    for i in enumerate(matches, start=1):
+        print("blink #", i)
+        # red (no kidding)
+        b1.fade_to_color(500, 'red')
+        time.sleep(1)
+        # black
+        b1.fade_to_rgb(1000, 0, 0, 0)
+        time.sleep(1)

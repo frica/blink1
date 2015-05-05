@@ -11,7 +11,7 @@ from blink1.blink1 import Blink1
 
 blink1 = Blink1()
 
-if ( blink1.dev == None ):
+if blink1.dev is None:
     print("no blink1 found")
 else:
     print("blink(1) found")
