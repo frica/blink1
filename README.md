@@ -13,3 +13,4 @@ Simply run like this:
 **Note**
 
 * demo1.py needs you to compile from source the latest version of the python API, at least if you are using Ubuntu. 
+* jenkins.py is inspired by https://github.com/msherry/blink-jenkins
