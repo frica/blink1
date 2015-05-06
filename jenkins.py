@@ -1,17 +1,26 @@
 #!/usr/bin/env python
+# Usage: python3 jenkins.py -u=https://builds.apache.org/job/AuroraBot
 
 from blink1.blink1 import Blink1
 import requests
 import time
 import json
+import argparse
 
-blink = Blink1()
+parser = argparse.ArgumentParser(description='Check the status of a Jenkins job.')
+parser.add_argument('-u', '--url', help='url of the Jenkins job', required=True)
+args = parser.parse_args()
 
-# example job
-url = 'https://builds.apache.org/job/AuroraBot/lastBuild/api/json'
+url = args.url
 
 try:
-    response = requests.get(url)
+    blink = Blink1()
+except RuntimeError:  # BlinkConnectionFailed(RuntimeError):
+    print("No blink1 found! Exiting now...")
+    exit()
+
+try:
+    response = requests.get(url + "/lastBuild/api/json")
     response.raise_for_status()
 except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
     blink.fade_to_color(500, 'white')
