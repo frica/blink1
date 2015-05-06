@@ -7,7 +7,6 @@ Example usage (on Ubuntu):
 python3 jenkins.py -u=https://builds.apache.org/job/AuroraBot
 
 """
-# Usage: python3 jenkins.py -u=https://builds.apache.org/job/AuroraBot
 
 from blink1.blink1 import Blink1
 import requests
