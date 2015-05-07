@@ -14,6 +14,8 @@ import time
 import json
 import argparse
 
+INTERVAL = 30
+
 parser = argparse.ArgumentParser(description='Check the status of a Jenkins job.')
 parser.add_argument('-u', '--url', help='url of the Jenkins job', required=True)
 args = parser.parse_args()
@@ -26,28 +28,47 @@ except RuntimeError:  # BlinkConnectionFailed(RuntimeError):
     print("No blink1 found, exiting now...")
     exit()
 
-try:
-    response = requests.get(url + "/lastBuild/api/json")
-    response.raise_for_status()
-except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
-    blink.fade_to_color(500, 'white')
-    time.sleep(2)
-    print("Unable to get the url, exiting now...")
-    exit()
+iteration = 0
 
 try:
-    jenkinsData = json.loads(response.text)
-except ValueError:
-    print("invalid json")
-else:
-    if "result" in jenkinsData:
-        print(jenkinsData["result"])
-        if jenkinsData["result"] == "SUCCESS":
-            blink.fade_to_color(2000, "blue")
+    while True:
+        try:
+            url += "/lastBuild/api/json"
+            response = requests.get(url)
+            response.raise_for_status()
+        except (requests.exceptions.ConnectionError,
+                requests.exceptions.Timeout, requests.exceptions.HTTPError):
+            blink.fade_to_color(500, 'white')
             time.sleep(2)
-        elif jenkinsData["result"] == "FAILURE":
-            blink.fade_to_color(2000, "red")
-            time.sleep(2)
+            print("Unable to get the url, exiting now...")
+            break
 
-blink.fade_to_rgb(1000, 0, 0, 0)
+        try:
+            jenkinsData = json.loads(response.text)
+        except ValueError:
+            print("Invalid json from ", url)
+            break
+
+        iteration += 1
+        print("Check # ", iteration)
+        if "result" in jenkinsData:
+            print(jenkinsData["result"])
+            if jenkinsData["result"] == "SUCCESS":
+                blink.fade_to_color(2000, "blue")
+                time.sleep(2)
+            elif jenkinsData["result"] == "FAILURE":
+                blink.fade_to_color(2000, "red")
+                time.sleep(2)
+        else:
+            print("No result information in the json file.")
+        time.sleep(INTERVAL)
+        blink.fade_to_color(2000, "black")
+        time.sleep(2)
+except KeyboardInterrupt:
+    blink.fade_to_color(2000, "black")
+except Exception:
+    blink.fade_to_color(2000, "black")
+    raise
+
+blink.fade_to_color(2000, "black")
 blink.close()
