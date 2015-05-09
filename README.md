@@ -32,8 +32,9 @@ Then install:
 	sudo apt-get install libgl1-mesa-dev
 	sudo apt-get install mesa-common-dev
 
-Install qt5.3 (you'll need to create an account http://www.qt.io/download-open-source/)
+Install QT 5.3 (you'll need to create an account http://www.qt.io/download-open-source/)
 
 Start QTCreator and open qt/blink1control/blink1control.pro
+
 Click Rebuild: here it is!
 
