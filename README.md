@@ -8,6 +8,7 @@ My scripts using blink(1) USB RGB LED by ThingM http://blink1.thingm.com/
 
 Simply run (on Ubuntu 14.04):
 
+	pip install -r requirements.txt
 	python3 demo1.py
 
 * demo1.py needs you to compile from source the latest version of the python API, at least if you are using Ubuntu.
