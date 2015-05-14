@@ -24,16 +24,19 @@ def play_simple_pattern(pattern, blink):
     fade_first_color = float(pattern[2])
     fade_first_color = int(fade_first_color * 1000)
     print(fade_first_color)
-    led_fc = pattern[3]
+    led_fc = int(pattern[3])
     sec_color = pattern[4]
     fade_sec_color = int(float(pattern[5]) * 1000)
-    led_sc = pattern[6]
+
+    # test if last parameter is an empty string
+    led_sc = int(pattern[6]) if pattern[6] else 0
     print("We will flash {0} times between {1} and {2}".format(repeat, first_color, sec_color))
     for idx in range(0, repeat):
         blink.fade_to_rgb(fade_first_color, hex_to_rgb(first_color)[0], hex_to_rgb(first_color)[1],
-                          hex_to_rgb(first_color)[2])
+                          hex_to_rgb(first_color)[2], led_fc)
         time.sleep(1)
-        blink.fade_to_rgb(fade_sec_color, hex_to_rgb(sec_color)[0], hex_to_rgb(sec_color)[1], hex_to_rgb(sec_color)[2])
+        blink.fade_to_rgb(fade_sec_color, hex_to_rgb(sec_color)[0], hex_to_rgb(sec_color)[1], hex_to_rgb(sec_color)[2],
+                          led_sc)
         time.sleep(1)
 
 
