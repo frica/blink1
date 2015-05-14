@@ -1,0 +1,3 @@
+requests == 2.2.1
+blink1 == 0.0.12
+pyperclip == 1.5.9.egg
