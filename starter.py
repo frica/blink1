@@ -1,9 +1,11 @@
+""" Find matches in clipboard text
+
+"""
 import time
 from blink1.blink1 import Blink1
 import pyperclip
 import re
 
-# Find matches in clipboard text.
 text = str(pyperclip.paste())
 matches = []
 
