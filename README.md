@@ -12,7 +12,7 @@ Simply run (on Ubuntu 14.04):
 	python3 demo1.py
 
 * demo1.py needs you to compile from source the latest version of the python API, at least if you are using Ubuntu.
-* starter.py blinks asd many times as my Github name is found on the clipboard
+* starter.py blinks as many times as my Github name is found on the clipboard
 * jenkins.py is inspired by https://github.com/msherry/blink-jenkins
 * patterns.py play the same sample patterns available in the BlinkControl tool
 
