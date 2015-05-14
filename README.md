@@ -33,6 +33,8 @@ Then install the following packages:
 	sudo apt-get install mesa-common-dev
 
 Install QT 5.3 (you'll need to create an account http://www.qt.io/download-open-source/)
+
 Start QTCreator and open qt/blink1control/blink1control.pro
+
 Click Rebuild: here it is!
 
