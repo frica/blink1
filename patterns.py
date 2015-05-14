@@ -3,6 +3,7 @@
 """ Load blinking patterns defined in BlinkControl
 
 """
+
 import json
 import time
 from blink1.blink1 import Blink1
@@ -35,28 +36,29 @@ def play_pattern(pattern, blink):
             time.sleep(1)
             index += 3
 
+if __name__ == '__main__':
 
-blink = Blink1()
+    blink = Blink1()
 
-try:
-    patternFile = open('patternsReadOnly.json', 'r')
-    patternData = json.load(patternFile)
-except ValueError:
-    print("Invalid json from ", patternFile)
-    exit()
+    try:
+        patternFile = open('patternsReadOnly.json', 'r')
+        patternData = json.load(patternFile)
+    except ValueError:
+        print("Invalid json from ", patternFile)
+        exit()
 
-# pretty print json data
-# print(json.dumps(patternData, indent=1))
+    # pretty print json data
+    # print(json.dumps(patternData, indent=1))
 
-print("# of patterns found: {}".format(len(patternData)))
+    print("# of patterns found: {}".format(len(patternData)))
 
-if len(patternData) != 0:
-    for i in range(0, len(patternData)):
-        pattern = [x.strip() for x in patternData[i]["pattern"].split(',')]
-        print("Pattern: {}".format(patternData[i]["name"]))
-        play_pattern(pattern, blink)
+    if len(patternData) != 0:
+        for i in range(0, len(patternData)):
+            pattern = [x.strip() for x in patternData[i]["pattern"].split(',')]
+            print("Pattern: {}".format(patternData[i]["name"]))
+            play_pattern(pattern, blink)
 
-blink.fade_to_rgb(1000, 0, 0, 0)
-blink.close()
+    blink.fade_to_rgb(1000, 0, 0, 0)
+    blink.close()
 
-patternFile.close()
+    patternFile.close()
